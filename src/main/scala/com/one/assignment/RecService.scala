@@ -27,10 +27,10 @@ trait RecsJsonMarshaller {
 trait RecService {
   // default variables
   implicit val BASE_URL: String = "http://localhost:8080/recs/personalised"
-  var DEFAULT_TIME_TO_WAIT = 10 seconds
-  var DEFAULT_NUM_SLOTS = 3
-  var DEFAULT_SLOT_DURATION = 1 hour
-  var DEFAULT_NUM_REQUESTS = 5
+  val DEFAULT_TIME_TO_WAIT = 10 seconds
+  val DEFAULT_NUM_SLOTS = 3
+  val DEFAULT_SLOT_DURATION = 1 hour
+  val DEFAULT_NUM_REQUESTS = 5
 
 
   /**

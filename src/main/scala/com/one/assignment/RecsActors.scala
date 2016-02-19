@@ -56,8 +56,8 @@ class RecsMaster extends Actor {
  val recsAggregator = system.actorOf(Props[RecsAggregator], name = "recsAggregator")
 
  val noOfReqs = 3
- var noOfRes:Int =0
- var result = List[JRecommendation]()
+ private var noOfRes:Int =0
+ private var result = List[JRecommendation]()
 
  override  def receive ={
 
