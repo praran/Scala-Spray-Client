@@ -27,7 +27,7 @@ trait RecsJsonMarshaller {
 trait RecService {
   // default variables
   implicit val BASE_URL: String = "http://localhost:8080/recs/personalised"
-  val DEFAULT_TIME_TO_WAIT = 10 seconds
+  var DEFAULT_TIME_TO_WAIT = 10 seconds
   val DEFAULT_NUM_SLOTS = 3
   val DEFAULT_SLOT_DURATION = 1 hour
   val DEFAULT_NUM_REQUESTS = 5
@@ -84,15 +84,16 @@ class RecServiceClass(client: RecsEngineRestClient) extends RecService with Recs
    * @return
    */
   def getRecommendations(num: Long, start: Long, end: Long, sub: String): Future[JRecommendation] = {
-    /*val recs =     RecsEngineRestClientObj.getRequest(constructUrl(num, start, end, sub))(`application/xml`)
-     Await.result(recs, 5 seconds)*/
-    val result = Promise[JRecommendation]
-    // val x = new RecsEngineRestClientClass
+/*    val result = Promise[JRecommendation]
     client.getRequest(constructUrl(num, start, end, sub))(`application/xml`) onComplete {
       case Success(r) => result.success(JRecommendation(r, end))
       case Failure(ex) => result.failure(new Exception(s"Could not get result ${num} ${start} ${end} ${sub}"))
-    }
-    result.future
+    }*/
+
+ client.getRequest(constructUrl(num, start, end, sub))(`application/xml`)
+    .map(result => JRecommendation(result, end))
+
+    //result.future
   }
 
   /**
